@@ -1,0 +1,27 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout2
+        uses: actions/checkout@v2
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set Up SSH
+        uses: webfactory/ssh-agent@v0.5.0
+        with:
+          ssh-private-key: ${{ secrets.AUTH_SSH }}
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no egor@185.250.44.151 'cd dev/MongoWebApi && git pull && docker-compose down &&  docker-compose up -d --build'

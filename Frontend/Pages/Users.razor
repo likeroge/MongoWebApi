@@ -1,0 +1,37 @@
+@page "/Users"
+@using Frontend.Models
+@inject HttpClient Http
+
+<h3>Users</h3>
+
+<div>
+    @if ((users ?? Array.Empty<User>()).Any())
+    {
+        <ul>
+            @foreach (var user in users)
+            {
+                <li>@user.Name</li>
+            }
+        </ul>
+    }
+</div>
+
+
+@code {
+    private IEnumerable<User>? users;
+    private string? errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("INit page hook");
+        try
+        {
+            users = await Http.GetFromJsonAsync<IEnumerable<User>>("/api/users");
+            Console.WriteLine(users);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+@page "/AddUser"
+@using Frontend.Models
+@inject HttpClient Http
+
+
+<h3>AddUser</h3>
+
+<EditForm Model="@newUser" OnValidSubmit="@OnAddUser">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    
+    <label for="name">Name</label>
+    <InputText @bind-Value="@newUser.Name" id="name"/>
+    <ValidationMessage For="() => newUser.Name"/>
+
+    <label for="email">Email</label>
+    <InputText @bind-Value="@newUser.Email" id="email"/>
+    <ValidationMessage For="() => newUser.Email"/>
+
+    <button>Add user</button>
+
+</EditForm>
+
+<div>
+@if (showSuccessMessage)
+{
+<div class="alert alert-success mt-3">
+    User added successfully!
+</div>
+}
+
+@if (errorMessage != null)
+{
+<div class="alert alert-danger mt-3">
+    @errorMessage
+</div>
+}
+</div>
+
+@code {
+    private User newUser = new User();
+    private bool showSuccessMessage;
+    private string? errorMessage;
+    
+    public async Task OnAddUser()
+    {
+        
+        Console.WriteLine(newUser.Name);
+        Console.WriteLine(newUser.Email);
+        try
+        {
+            var response = await Http.PostAsJsonAsync("/api/users", newUser);
+            Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.IsSuccessStatusCode);
+            if (response.IsSuccessStatusCode)
+            {
+                showSuccessMessage = true;
+                newUser = new User();
+                errorMessage = null;
+
+                // showSuccessMessage = false;
+            }
+            else
+            {
+                errorMessage = $"Error: {response.StatusCode}";
+                // newUser = new User();
+                // await Task.Delay(2000);
+                // errorMessage = null;
+            }
+    
+        }
+        catch (Exception e)
+        {
+            errorMessage = $"Exception: {e.Message}";
+        }
+    
+        
+    }
+}
