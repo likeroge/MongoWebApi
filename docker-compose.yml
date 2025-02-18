@@ -5,7 +5,7 @@ services:
     image: mcr.microsoft.com/dotnet/sdk:6.0
     container_name: mongo-web-api-backend
     volumes:
-      - MongoWebApi:/app
+      - ./MongoWebApi:/app
     working_dir: /app
     environment:
       - ASPNETCORE_URLS=http://*:5000
@@ -21,7 +21,7 @@ services:
 #      - ASPNETCORE_URLS=http://*:5010
     working_dir: /app
     volumes:
-      - Frontend:/app
+      - ./Frontend:/app
 #    ports:
 #      - "5010:5010"
     command: bash -c "dotnet publish -c Release ./Frontend.csproj -o ./publish"
