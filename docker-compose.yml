@@ -22,8 +22,8 @@ services:
     working_dir: /app
     volumes:
       - ./Frontend:/app
-#    ports:
-#      - "5010:5010"
+    ports:
+      - "5010:5010"
     command: bash -c "dotnet publish -c Release ./Frontend.csproj -o ./publish"
 #    command: bash -c "dotnet publish -c Release ./Frontend.csproj -o ./publish && dotnet ./publish/Frontend.dll"
 #command: bash -c "dotnet publish -c Release ./BlazorApp1.csproj -o ./publish && dotnet ./publish/BlazorApp1.dll"
