@@ -9,6 +9,7 @@ services:
     working_dir: /app
     environment:
       - ASPNETCORE_URLS=http://*:5000
+      - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "5000:5000"
     command: bash -c "dotnet publish -c Release ./Frontend.csproj -o ./publish && dotnet ./publish/Frontend.dll"
