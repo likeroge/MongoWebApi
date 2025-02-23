@@ -14,4 +14,13 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
+    </ItemGroup>
+
+<!--    <Target Name="Tailwind" BeforeTargets="Build">-->
+<!--        <Exec Command="npx @tailwindcss/cli -i ./wwwroot/css/styles.css -o ./wwwroot/css/out.css" />-->
+<!--    </Target>-->
+
 </Project>

@@ -1,23 +1,29 @@
 @page "/AddUser"
 @inject HttpClient Http
-@using Frontend.Models
 @using Frontend.Models.DTO
-<h3>AddUser</h3>
+<h3 class="text-2xl text-center" >AddUser</h3>
 
-<EditForm Model="@newUser" OnValidSubmit="@OnAddUser">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <label for="name">Name</label>
-    <InputText @bind-Value="newUser.Name" id="name"/>
-    <ValidationMessage For="() => newUser.Name"/>
-
-    <label for="email">Email</label>
-    <InputText @bind-Value="newUser.Email" id="email"/>
-    <ValidationMessage For="() => newUser.Email"/>
-
-    <button>Add user</button>
+<div class="flex justify-center">
+<EditForm class="shadow-lg p-3 w-1/2" Model="@newUser" OnValidSubmit="@OnAddUser">
+    <div class="text-red-500">
+        <DataAnnotationsValidator />
+        @* <ValidationSummary/> *@
+    </div>
+    <div class="flex flex-col">
+        <label for="name">Name:</label>
+        <InputText @bind-Value="newUser.Name" id="name" class="border border-gray-400"/>
+        <div class="text-red-500">
+            <ValidationMessage For="() => newUser.Name" class="text-red-500" />
+        </div>
+        <label for="email">Email:</label>
+        <InputText @bind-Value="newUser.Email" id="email" class="border border-gray-400" />
+        <div class="text-red-500">
+            <ValidationMessage For="() => newUser.Email"/>
+        </div>
+        <button class="mt-3 hover:cursor-pointer px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white">Add user</button>
+    </div>
 </EditForm>
+</div>
 
 <div>
     @if (showSuccessMessage)
@@ -72,7 +78,7 @@
             errorMessage = $"Exception: {e.Message}";
         }
 
-        Thread.Sleep(2000);
-        showSuccessMessage = false;
+        // Thread.Sleep(2000);
+        // showSuccessMessage = false;
     }
 }
