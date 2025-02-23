@@ -1,9 +1,9 @@
+using Frontend.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MongoWebApi.Configurations;
-using MongoWebApi.Models;
+using Frontend.Configurations;
 
-namespace MongoWebApi.Data.Context;
+namespace Frontend.Data.Context;
 
 public class MongoDbContext
 {

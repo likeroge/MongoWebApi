@@ -1,10 +1,10 @@
+using Frontend.Data.Context;
+using Frontend.Models;
+using Frontend.Models.DTO;
 using MongoDB.Driver;
-using MongoWebApi.Data.Context;
-using MongoWebApi.Models;
-using MongoWebApi.Models.DTO;
-using MongoWebApi.Repos.Interfaces;
+using Frontend.Repos.Interfaces;
 
-namespace MongoWebApi.Repos;
+namespace Frontend.Repos;
 
 public class UserRepository : ICrud<User>
 {

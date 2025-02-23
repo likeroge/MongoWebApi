@@ -1,4 +1,4 @@
-namespace MongoWebApi;
+namespace Frontend.Data;
 
 public class WeatherForecast
 {

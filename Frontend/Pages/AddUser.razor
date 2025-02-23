@@ -1,64 +1,62 @@
 @page "/AddUser"
-@using Frontend.Models
 @inject HttpClient Http
-
-
+@using Frontend.Models
+@using Frontend.Models.DTO
 <h3>AddUser</h3>
 
 <EditForm Model="@newUser" OnValidSubmit="@OnAddUser">
     <DataAnnotationsValidator />
     <ValidationSummary />
-    
+
     <label for="name">Name</label>
-    <InputText @bind-Value="@newUser.Name" id="name"/>
+    <InputText @bind-Value="newUser.Name" id="name"/>
     <ValidationMessage For="() => newUser.Name"/>
 
     <label for="email">Email</label>
-    <InputText @bind-Value="@newUser.Email" id="email"/>
+    <InputText @bind-Value="newUser.Email" id="email"/>
     <ValidationMessage For="() => newUser.Email"/>
 
     <button>Add user</button>
-
 </EditForm>
 
 <div>
-@if (showSuccessMessage)
-{
-<div class="alert alert-success mt-3">
-    User added successfully!
-</div>
-}
+    @if (showSuccessMessage)
+    {
+    <div class="alert alert-success mt-3">
+        User added successfully!
+    </div>
+    }
 
-@if (errorMessage != null)
-{
-<div class="alert alert-danger mt-3">
-    @errorMessage
-</div>
-}
+    @if (errorMessage != null)
+    {
+    <div class="alert alert-danger mt-3">
+        @errorMessage
+    </div>
+    }
 </div>
 
 @code {
-    private User newUser = new User();
+    private CreateUserDto newUser = new CreateUserDto();
     private bool showSuccessMessage;
     private string? errorMessage;
     
-    public async Task OnAddUser()
+    private async Task OnAddUser()
     {
-        
-        Console.WriteLine(newUser.Name);
-        Console.WriteLine(newUser.Email);
+        // newUser = new CreateUserDto("", "");
         try
         {
+            Console.WriteLine("ADD USER");
             var response = await Http.PostAsJsonAsync("/api/users", newUser);
-            Console.WriteLine(response.StatusCode);
-            Console.WriteLine(response.IsSuccessStatusCode);
+            // Console.WriteLine(response.StatusCode);
+            // Console.WriteLine(response.IsSuccessStatusCode);
             if (response.IsSuccessStatusCode)
             {
                 showSuccessMessage = true;
-                newUser = new User();
+                newUser = new CreateUserDto();
                 errorMessage = null;
-
-                // showSuccessMessage = false;
+        
+                // await Task.Delay(2000);
+                // 
             }
             else
             {
@@ -67,13 +65,14 @@
                 // await Task.Delay(2000);
                 // errorMessage = null;
             }
-    
+            // newUser = new User();
         }
         catch (Exception e)
         {
             errorMessage = $"Exception: {e.Message}";
         }
-    
-        
+
+        Thread.Sleep(2000);
+        showSuccessMessage = false;
     }
 }

@@ -1,4 +1,4 @@
-namespace MongoWebApi.Repos.Interfaces;
+namespace Frontend.Repos.Interfaces;
 
 public interface ICrud<T>
 {

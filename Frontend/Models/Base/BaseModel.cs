@@ -1,6 +1,6 @@
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MongoWebApi.Models.Base;
+namespace Frontend.Models.Base;
 
 public abstract class BaseModel
 {

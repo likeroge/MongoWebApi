@@ -1,29 +1,15 @@
 version: "3.8"
 
 services:
-  backend:
+  fullstackapp:
     image: mcr.microsoft.com/dotnet/sdk:6.0
-    container_name: mongo-web-api-backend
+    container_name: mongo-web-app
     volumes:
-      - ./MongoWebApi:/app
+      - ./Frontend:/app
     working_dir: /app
     environment:
       - ASPNETCORE_URLS=http://*:5000
     ports:
       - "5000:5000"
-    command: bash -c "dotnet publish -c Release ./MongoWebApi.csproj -o ./publish && dotnet ./publish/MongoWebApi.dll"
+    command: bash -c "dotnet publish -c Release ./Frontend.csproj -o ./publish && dotnet ./publish/Frontend.dll"
   
-  
-  frontend:
-    image: mcr.microsoft.com/dotnet/sdk:6.0
-    container_name: mongo-web-api-front
-#    environment:
-#      - ASPNETCORE_URLS=http://*:5010
-    working_dir: /app
-    volumes:
-      - ./Frontend:/app
-    ports:
-      - "5010:5010"
-    command: bash -c "dotnet publish -c Release ./Frontend.csproj -o ./publish"
-#    command: bash -c "dotnet publish -c Release ./Frontend.csproj -o ./publish && dotnet ./publish/Frontend.dll"
-#command: bash -c "dotnet publish -c Release ./BlazorApp1.csproj -o ./publish && dotnet ./publish/BlazorApp1.dll"

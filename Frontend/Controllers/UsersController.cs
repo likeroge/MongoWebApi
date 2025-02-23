@@ -1,9 +1,9 @@
+using Frontend.Models;
+using Frontend.Models.DTO;
+using Frontend.Repos;
 using Microsoft.AspNetCore.Mvc;
-using MongoWebApi.Models;
-using MongoWebApi.Models.DTO;
-using MongoWebApi.Repos;
 
-namespace MongoWebApi.Controllers;
+namespace Frontend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -36,5 +36,5 @@ public class UsersController
         return await _users.Create(dto);
     }
     
-    [HttpDelete("{id}")] public async Task Delete(string id) => await _users.Delete(id); //[]
+    [HttpDelete("{id}")] public async Task Delete(string id) => await _users.Delete(id); 
 }

@@ -1,4 +1,4 @@
-namespace MongoWebApi.Configurations;
+namespace Frontend.Configurations;
 
 public class MongoDBSettings
 {
