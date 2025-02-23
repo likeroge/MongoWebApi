@@ -19,8 +19,8 @@ builder.Logging.AddSerilog();
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDBSettings"));
 
 //HttpClient
-builder.Services.AddHttpClient("MainHttpClient",client=> client.BaseAddress = new Uri("http://localhost:5010"));
-builder.Services.AddScoped(serviceProvider => new HttpClient{BaseAddress = new Uri("http://localhost:5010")} );
+// builder.Services.AddHttpClient("MainHttpClient",client=> client.BaseAddress = new Uri("http://localhost:5010"));
+builder.Services.AddScoped(serviceProvider => new HttpClient{BaseAddress = new Uri("http://localhost:5000")} );
 
 //Database
 builder.Services.AddSingleton<MongoDbContext>();
